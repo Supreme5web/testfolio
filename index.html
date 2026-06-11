@@ -2663,6 +2663,14 @@
         transition-duration: 0.01ms !important;
       }
     }
+    html {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+html::-webkit-scrollbar {
+  display: none;
+}
   </style>
 </head>
 
@@ -3116,11 +3124,7 @@
         something<br><em>impossible-looking.</em></h2>
       <div class="contact-columns">
         <div class="contact-info-col">
-          <div class="contact-glass-card reveal-glow" style="transition-delay:0.2s">
-            <div class="contact-intro-label">Who I am</div>
-            <p class="contact-intro-text">Supremee is a frontend engineer and Web3 builder open for freelance work,
-              partnerships, and interesting collabs. I work fast, communicate clearly, and care deeply about craft.</p>
-          </div>
+         
           <div class="contact-glass-card reveal-glow" style="transition-delay:0.3s">
             <div class="contact-intro-label">Reach out directly</div>
             <div class="contact-details">
