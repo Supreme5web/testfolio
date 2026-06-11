@@ -646,90 +646,165 @@
     }
 
     /* ══ ABOUT ════════════════════════════════════════════ */
-    #about {
-      padding: 120px 40px;
-      border-bottom: 1px solid var(--line);
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: center;
-      max-width: 1400px;
-      margin: 0 auto;
-    }
+   /* ══ ABOUT — COMPACT WITH SIDE GLOW ═════════════════ */
+#about {
+  padding: 100px 40px;
+  border-bottom: 1px solid var(--line);
+  position: relative;
+  overflow: hidden;
+  max-width: 100%;
+  margin: 0;
+}
 
-    .about-eyebrow {
-      font-size: 0.68rem;
-      font-weight: 700;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--red);
-      margin-bottom: 20px;
-    }
+/* Background ambient */
+#about::before {
+  content: '';
+  position: absolute;
+  width: 500px; height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(230,48,39,0.04) 0%, transparent 65%);
+  top: -100px; left: -150px;
+  pointer-events: none;
+  z-index: 0;
+}
 
-    .about-heading {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(2rem, 4vw, 3.4rem);
-      font-weight: 700;
-      line-height: 1.05;
-      letter-spacing: -0.02em;
-      margin-bottom: 28px;
-    }
+.about-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+  align-items: center;
+}
 
-    .about-heading em {
-      font-style: normal;
-      color: var(--red);
-    }
+/* Left column */
+.about-left {
+  position: relative;
+}
 
-    .about-body {
-      font-size: 1rem;
-      line-height: 1.8;
-      color: var(--muted);
-      max-width: 500px;
-    }
+.about-eyebrow {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 20px;
+  font-family: 'Space Grotesk', sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 
-    .about-right {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1px;
-      background: var(--line);
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      overflow: hidden;
-    }
+.about-eyebrow::before {
+  content: '';
+  width: 30px;
+  height: 1px;
+  background: var(--red);
+}
 
-    .about-stat {
-      background: var(--bg2);
-      padding: 32px 28px;
-      transition: background 0.2s;
-    }
+.about-heading {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(2rem, 3.5vw, 3.2rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin-bottom: 24px;
+}
 
-    .about-stat:hover {
-      background: var(--bg3);
-    }
+.about-heading em {
+  font-style: normal;
+  color: var(--red);
+}
 
-    .about-stat-num {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 2.6rem;
-      font-weight: 700;
-      color: var(--white);
-      line-height: 1;
-    }
+.about-body {
+  font-size: 0.9rem;
+  line-height: 1.75;
+  color: var(--muted);
+  max-width: 440px;
+}
 
-    .about-stat-num sup {
-      font-size: 1.2rem;
-      color: var(--red);
-      vertical-align: super;
-    }
+.about-body strong {
+  color: var(--white);
+  font-weight: 600;
+}
 
-    .about-stat-label {
-      font-size: 0.76rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--soft);
-      margin-top: 8px;
-    }
+.about-body + .about-body {
+  margin-top: 14px;
+}
 
+/* Right column — stat cards */
+.about-right {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.about-stat-card {
+  background: rgba(255,255,255,0.02);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 16px;
+  padding: 24px 20px;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.about-stat-card:hover {
+  background: rgba(255,255,255,0.04);
+  border-color: rgba(255,255,255,0.1);
+  transform: translateX(6px);
+}
+
+/* Side glow line */
+.about-stat-card::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 15%; bottom: 15%;
+  width: 2px;
+  border-radius: 2px;
+  background: linear-gradient(to bottom, transparent, var(--red), transparent);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.about-stat-card:hover::before {
+  opacity: 1;
+}
+
+.about-stat-num {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.about-stat-num sup {
+  font-size: 0.85rem;
+  color: var(--red);
+  vertical-align: super;
+}
+
+.about-stat-label {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--soft);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  #about { padding: 70px 20px; }
+  .about-inner { grid-template-columns: 1fr; gap: 36px; }
+  .about-right { grid-template-columns: 1fr 1fr; }
+  .about-stat-card:hover { transform: translateX(4px); }
+}
     /* ══ EXPERTISE PINNED SHOWCASE ════════════════════════ */
     .expertise-pin-wrapper {
       position: relative;
@@ -2654,35 +2729,50 @@
   </div>
 
   <!-- ABOUT -->
-  <section id="about">
-    <div class="reveal-slide-up">
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-inner">
+    
+    <!-- Left -->
+    <div class="about-left reveal-slide-up">
       <div class="about-eyebrow">About Me</div>
       <h2 class="about-heading">Engineer.<br>Artist.<br><em>Web3 builder.</em></h2>
-      <p class="about-body">I go by <strong style="color:var(--white)">Supremee</strong> — a creator who fuses software
-        engineering, digital artistry, and Web3-native thinking into one bold lane. I build things that feel <em
-          style="font-style:italic;color:var(--white)">alive</em> from the first click.</p>
-      <p class="about-body" style="margin-top:16px;">Specialising in the Solana ecosystem: memecoin landing pages,
-        wallet trackers, trading platforms, and DApps — all delivered clean, fast, and without a build step.</p>
+      <p class="about-body">
+        I go by <strong>Supremee</strong> — a creator who fuses software engineering, digital artistry,
+        and Web3-native thinking into one bold lane. I build things that feel <em style="font-style:italic;color:var(--white)">alive</em> from the first click.
+      </p>
+      <p class="about-body">
+        Specialising in the Solana ecosystem: memecoin landing pages, wallet trackers,
+        trading platforms, and DApps — all delivered clean, fast, and without a build step.
+      </p>
     </div>
+
+    <!-- Right: Stat cards -->
     <div class="about-right reveal-slide-right" style="transition-delay:0.2s">
-      <div class="about-stat">
+      
+      <div class="about-stat-card">
         <div class="about-stat-num">4<sup>+</sup></div>
         <div class="about-stat-label">Years of Experience</div>
       </div>
-      <div class="about-stat">
+
+      <div class="about-stat-card">
         <div class="about-stat-num">50<sup>+</sup></div>
         <div class="about-stat-label">Projects Completed</div>
       </div>
-      <div class="about-stat">
-        <div class="about-stat-num" style="font-size:1.8rem;padding-top:4px">Web3</div>
+
+      <div class="about-stat-card">
+        <div class="about-stat-num">Web<span style="color:var(--red)">3</span></div>
         <div class="about-stat-label">Blockchain & DApps</div>
       </div>
-      <div class="about-stat">
+
+      <div class="about-stat-card">
         <div class="about-stat-num">∞</div>
         <div class="about-stat-label">Creative Curiosity</div>
       </div>
+
     </div>
-  </section>
+  </div>
+</section>
 
   <!-- EXPERTISE -->
   <div class="expertise-pin-wrapper" id="expertiseWrapper">
